@@ -1,8 +1,9 @@
 package adaguz.rentalservice.controller;
 
+import adaguz.rentalservice.model.Movie;
 import adaguz.rentalservice.service.RentalService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/rentalservice")
@@ -14,6 +15,15 @@ public class RentalServiceController {
         this.rentalService = rentalService;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Movie> getMovie(@PathVariable Long id){
+        return ResponseEntity.ok(rentalService.getMovie(id));
+    }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Movie> returnMovie(@PathVariable Long id){
+        rentalService.returnMovie(id);
+        return ResponseEntity.ok(rentalService.getMovie(id));
+    }
 
 }

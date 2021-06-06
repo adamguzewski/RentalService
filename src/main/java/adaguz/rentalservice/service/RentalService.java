@@ -1,6 +1,8 @@
 package adaguz.rentalservice.service;
 
-import org.springframework.beans.factory.annotation.Value;
+import adaguz.rentalservice.model.Movie;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -13,6 +15,14 @@ public class RentalService {
         this.restTemplate = restTemplate;
     }
 
+    public Movie getMovie(Long id) {
+        Movie movie = restTemplate.getForEntity("http://localhost:8080/movies/" + id, Movie.class).getBody();
+        return movie;
+    }
 
+
+    public void returnMovie(Long id){
+        restTemplate.put("http://localhost:8080/movies/update/" + id, Movie.class);
+    }
 
 }
