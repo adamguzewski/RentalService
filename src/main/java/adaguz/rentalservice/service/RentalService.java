@@ -20,9 +20,11 @@ public class RentalService {
         return movie;
     }
 
-
     public void returnMovie(Long id){
-        restTemplate.put("http://localhost:8080/movies/update/" + id, Movie.class);
+        restTemplate.put("http://localhost:8080/movies/returnmovie/" + id, null);
     }
 
+    public void rentMovie(Long id){
+        restTemplate.put("http://localhost:8080/movies/rentmovie/" + id, null);
+    }
 }

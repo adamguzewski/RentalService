@@ -20,9 +20,15 @@ public class RentalServiceController {
         return ResponseEntity.ok(rentalService.getMovie(id));
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/returnmovie/{id}")
     public ResponseEntity<Movie> returnMovie(@PathVariable Long id){
         rentalService.returnMovie(id);
+        return ResponseEntity.ok(rentalService.getMovie(id));
+    }
+
+    @PutMapping("/rentmovie/{id}")
+    public ResponseEntity<Movie> rentMovie(@PathVariable Long id){
+        rentalService.rentMovie(id);
         return ResponseEntity.ok(rentalService.getMovie(id));
     }
 
