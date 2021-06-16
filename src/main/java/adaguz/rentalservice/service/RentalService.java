@@ -23,9 +23,6 @@ public class RentalService {
         }
     }
 
-    // Stworzyć jedną metodę zmieniającą status  wypożyczenia przez exchange
-    // utworzyć zmienną zawierającą większość adresu
-
     public void returnMovie(Long id) {
         restTemplate.put("http://localhost:8080/movies/returnmovie/" + id, null);
     }
