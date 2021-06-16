@@ -1,5 +1,6 @@
 package adaguz.rentalservice.controller;
 
+import adaguz.rentalservice.advice.MovieNotFoundException;
 import adaguz.rentalservice.model.Movie;
 import adaguz.rentalservice.service.RentalService;
 import org.springframework.http.ResponseEntity;
@@ -16,20 +17,19 @@ public class RentalServiceController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Movie> getMovie(@PathVariable Long id){
+    public ResponseEntity<Movie> getMovie(@PathVariable Long id) throws MovieNotFoundException {
         return ResponseEntity.ok(rentalService.getMovie(id));
-    }
+        }
 
     @PutMapping("/returnmovie/{id}")
-    public ResponseEntity<Movie> returnMovie(@PathVariable Long id){
+    public ResponseEntity<Movie> returnMovie(@PathVariable Long id) {
         rentalService.returnMovie(id);
         return ResponseEntity.ok(rentalService.getMovie(id));
     }
 
     @PutMapping("/rentmovie/{id}")
-    public ResponseEntity<Movie> rentMovie(@PathVariable Long id){
+    public ResponseEntity<Movie> rentMovie(@PathVariable Long id) {
         rentalService.rentMovie(id);
         return ResponseEntity.ok(rentalService.getMovie(id));
     }
-
 }

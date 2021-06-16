@@ -1,8 +1,7 @@
 package adaguz.rentalservice.service;
 
+import adaguz.rentalservice.advice.MovieNotFoundException;
 import adaguz.rentalservice.model.Movie;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,15 +15,22 @@ public class RentalService {
     }
 
     public Movie getMovie(Long id) {
-        Movie movie = restTemplate.getForEntity("http://localhost:8080/movies/" + id, Movie.class).getBody();
-        return movie;
+        try {
+            Movie movie = restTemplate.getForEntity("http://localhost:8080/movies/" + id, Movie.class).getBody();
+            return movie;
+        } catch (Exception exception) {
+            throw new MovieNotFoundException(id);
+        }
     }
 
-    public void returnMovie(Long id){
+    // Stworzyć jedną metodę zmieniającą status  wypożyczenia przez exchange
+    // utworzyć zmienną zawierającą większość adresu
+
+    public void returnMovie(Long id) {
         restTemplate.put("http://localhost:8080/movies/returnmovie/" + id, null);
     }
 
-    public void rentMovie(Long id){
+    public void rentMovie(Long id) {
         restTemplate.put("http://localhost:8080/movies/rentmovie/" + id, null);
     }
 }
