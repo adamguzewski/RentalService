@@ -18,7 +18,6 @@ public class RentalService {
 
     public Movie getMovie(Long id) {
         String url = movieServiceAddress + id;
-
         Movie movie = restTemplate.getForEntity(url, Movie.class).getBody();
         return movie;
     }
